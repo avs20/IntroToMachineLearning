@@ -5,7 +5,7 @@ dataset and how it can be used to answer the project question. Were there any
  outliers in the data when you got it, and how did you handle those?  [relevant
  rubric items: “data exploration”, “outlier investigation”]
 
-2. What features did you end up using in your POI identifier, and what
+**2. What features did you end up using in your POI identifier, and what
 selection process did you use to pick them? Did you have to do any scaling?
  Why or why not? As part of the assignment, you should attempt to engineer
  your own feature that does not come ready-made in the dataset -- explain
@@ -16,7 +16,38 @@ selection process did you use to pick them? Did you have to do any scaling?
   you used an automated feature selection function like SelectKBest, please
   report the feature scores and reasons for your choice of parameter values.
    [relevant rubric items: “create new features”, “properly scale features”,
-    “intelligently select feature”]
+    “intelligently select feature”]**
+
+I have used almost all the features available to me both the financial and the
+emails feature pre-processed by the Udacity. Earlier during the project work
+I decided to chose all the features and then manually remove the features one
+by one but that process got tediuos and the results were not improving
+significantly. So I tried to automate the feature selection. I tried SelectKBest
+algorithm to chose the best features and results improved. Below is the accuracy
+score for the best feature selection at 5,10,15 and 19 features.
+
+|# of features | p-score | recall-score | f1 - score |
+|--------------|---------|--------------|------------|
+|5||||
+|10||||
+|15||||
+|18|||||
+
+***New feature Creation*** - For the requirement of the project I created a
+feature to quantify the communication of a person with persons of interest. It is
+highly likely that *poi's* will interact with each other often. The formula to
+quantify this was
+
+(messages_from_poi_to_this + messages_from_this_to_poi +  shared_receipts_with_poi) / total_messages
+
+This feature was added to the feature list as ***poi_ratio***.
+
+
+Before the selection of features they were scaled because the units were
+different for different features like salary was in dollars but to_messages were
+ in simple numbers. Scaling solves this problem by normalizing them on a single
+ scale.
+
 
 **3. What algorithm did you end up using? What other one(s) did you try? How did
  model performance differ between algorithms?  [relevant rubric item: “pick an
@@ -26,7 +57,30 @@ I did the training on the following algorithms
 
 1. RandomForest
 2. ***Logistic Regression ( WINNER )***
-3. Support Vector Machine 
+3. Support Vector Machine
+
+I ended up using the Logistic Regression algorithm because of its superior
+results in comparison to others. I was skeptical with Logistic Regression at
+first because of its simple premise and calculations but with optimum tuning
+and the pipeline it performed best. Below is the table for the performance
+of various algorithms tested.
+
+|Algorithm | Validation f1 Score | Test f1 Score |
+|--------------------------------------------------|
+|RandomForest | 0.35  | 0.46 |
+|Logistic Regression |0.35|0.46|
+|Support Vector Machines| 0.35 | 0.46 |
+
+The optimum params for the Logistic Regression algorithm are :
+
+|Parameter name |  Values |
+|-------------|-----------|
+|C | 10^20 |
+|Tolerance | 10 ^-10 |
+|Loss |'l1' |
+
+
+
 
 **4. What does it mean to tune the parameters of an algorithm, and what can
  happen if you don’t do this well?  How did you tune the parameters of your
