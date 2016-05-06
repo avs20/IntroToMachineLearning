@@ -26,15 +26,14 @@ def genrateClassifiers():
         'max_features' : [5, 10 ,15]
     }
 
-    # classifiers.append((clf1, param1))
+    classifiers.append((clf1, param1))
 
     clf2 = LogisticRegression(class_weight="auto", random_state=24)
     param2 = {
          'penalty' : ['l1','l2'],
-         # 'C' : [ 1e6,1e9,10**20],
-         # 'tol' : [ 10,10**-10,10**-20]
-         'C' : [ 1e3,1e6,10**20],
-         'tol' : [ 10**-10]
+
+         'C' : [ 1e3,1e6,1e9],
+         'tol' : [ 1e-3,1e-6,1e-10]
     }
 
     classifiers.append( (clf2,param2))
@@ -46,7 +45,7 @@ def genrateClassifiers():
         'gamma' : [1,10,1e3]
     }
 
-    # classifiers.append((clf3,param3))
+    classifiers.append((clf3,param3))
     return classifiers
 
 
@@ -120,7 +119,7 @@ for name_key in data_dict:
 
 
 features_list = features_list + ['poi_ratio']
-print len(features_list)
+# print len(features_list)
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
@@ -179,33 +178,13 @@ rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_tra
 print rpf_score
 
 
-#print features_train
-
-# clf = LogisticRegression(class_weight='auto', tol=10**-10)
-
-# param_grid = {
-#     'penalty' : ['l1','l2'],
-#     'C' : [ 1e6,1e9,10**20]
-# }
-
-# from sklearn.cross_validation import StratifiedShuffleSplit
-# cross_validator = StratifiedShuffleSplit(y = labels_train, random_state = 0)
-#
-# gridCV_object = grid_search.GridSearchCV(estimator=clf,param_grid=param_grid, scoring='f1', cv=cross_validator)
-# gridCV_object.fit(features_train,labels_train)
-
-print "Best parameters from parameter grid:", best_clf[0]
-
-
-
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
 ### that the version of poi_id.py that you submit can be run on its own and
 ### generates the necessary .pkl files for validating your results.
-# clf  = gridCV_object.best_estimator_
-# predictions = clf.predict(features_test)
-# from sklearn.metrics import f1_score
-#
-# print f1_score(predictions, labels_test)
-# print clf
-dump_classifier_and_data(best_clf[0], my_dataset, features_list)
+
+# Now use the best classifier to dump the files
+clf = LogisticRegression(C = 1000,class_weight="auto", penalty="l1", random_state= 24, tol= 0.001)
+
+
+dump_classifier_and_data(clf, my_dataset, features_list)
