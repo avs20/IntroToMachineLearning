@@ -18,17 +18,39 @@ selection process did you use to pick them? Did you have to do any scaling?
    [relevant rubric items: “create new features”, “properly scale features”,
     “intelligently select feature”]
 
-3. What algorithm did you end up using? What other one(s) did you try? How did
+**3. What algorithm did you end up using? What other one(s) did you try? How did
  model performance differ between algorithms?  [relevant rubric item: “pick an
- algorithm”]
+ algorithm”]**
 
-4. What does it mean to tune the parameters of an algorithm, and what can
+I did the training on the following algorithms
+
+1. RandomForest
+2. ***Logistic Regression ( WINNER )***
+3. Support Vector Machine 
+
+**4. What does it mean to tune the parameters of an algorithm, and what can
  happen if you don’t do this well?  How did you tune the parameters of your
   particular algorithm? (Some algorithms do not have parameters that you need
   to tune -- if this is the case for the one you picked, identify and briefly
    explain how you would have done it for the model that was not your final
    choice or a different model that does utilize parameter tuning, e.g. a
-   decision tree classifier).  [relevant rubric item: “tune the algorithm”]
+   decision tree classifier).  [relevant rubric item: “tune the algorithm”]**
+
+Each algorithm has some parameters inherent to it that lets us decide how much
+flexible we can be with the results or what type of loss do we want to
+calculate from the available list of choices. Not choosing the correct parameters
+ may lead us to not the optimum results. Also the parameters change for
+different datasets, so we also tune the parameters according to the dataset.
+
+The algorithm I chose finally is Logistic Regression and it has a list of parameters
+to tune from penalty type, C and tolerance. *Penalty* tries the different types
+of norm. *C* is used for the trade-off between smooth boundary or correct
+classification. *Tolerance* is the stopping criteria for the algorithm.
+
+While searching for different algorithms I tested RandomForest and SVM. They have
+some different params like number of estimators and features to use, gamma,
+kernel type ,etc..
+
 
 **5. What is validation, and what’s a classic mistake you can make if you do it
 wrong? How did you validate your analysis?  [relevant rubric item: “validation
