@@ -100,14 +100,14 @@ and the pipeline it performed best. Below is the table for the performance
 of various algorithms tested.
 
 |Algorithm | Validation f1 Score | Test f1 Score |
-|--------------------------------------------------|
+|----------|---------------------|------------------|
 |RandomForest | 0.333333 | 0.1761 |
 |Logistic Regression |0.5|0.4262|
 |Support Vector Machines|N/A| N/A|
 
 *N/A means the algorithm was unable to train on the given features*
 
-The optimum params for the Logistic Regression algorithm are :
+The optimum parameters for the Logistic Regression algorithm are :
 
 |Parameter name |  Values |
 |-------------|-----------|
