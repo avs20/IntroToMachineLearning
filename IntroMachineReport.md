@@ -27,7 +27,7 @@ below
 ***Outliers*** - I found two outliers in the financial data with the names
 appearing as **TOTAL** and **TRAVEL AGENCY IN THE PARK**. They were removed from the
 dataset before running the algorithms. *Total* was the sum total of all the
-finances and [*TRAVEL AGENCY IN THE PARK[3]*](#References) was an organization of the sister of
+finances and *TRAVEL AGENCY IN THE PARK[3]* was an organization of the sister of
 Ken Lay hence it was removed.
 
 Also in the dataset there were many missing values reported as **NaN**. These
