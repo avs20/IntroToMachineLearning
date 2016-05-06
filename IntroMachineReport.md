@@ -102,7 +102,7 @@ of various algorithms tested.
 |Algorithm | Validation f1 Score | Test f1 Score |
 |----------|---------------------|------------------|
 |RandomForest | 0.333333 | 0.1761 |
-|Logistic Regression |0.5|0.4262|
+|Logistic Regression |0.5|0.43190|
 |Support Vector Machines|N/A| N/A|
 
 *N/A means the algorithm was unable to train on the given features*
@@ -210,3 +210,4 @@ negative prediction. And we missed 63% of the cases we missed POI and classified
 3. [Travel Agency in the Park - News Report](http://content.time.com/time/magazine/article/0,9171,198885,00.html)
 4. [sklearn documentation](http://scikit-learn.org/stable/)
 5. [Enron Email dataset](https://www.cs.cmu.edu/~./enron/)
+6. [Sebasibarguen's Github Repo - for how to use GridSeachCV and Pipeline](https://github.com/sebasibarguen/udacity-nanodegree-machinelearning)

@@ -173,9 +173,9 @@ features_train, features_test, labels_train, labels_test = \
 
 clf_list = genrateClassifiers()
 
-rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_train)
+# rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_train)
 
-print rpf_score
+# print rpf_score
 
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
