@@ -57,12 +57,15 @@ significantly. So I tried to automate the feature selection. I tried SelectKBest
 algorithm to chose the best features and results improved. Below is the accuracy
 score for the best feature selection at 5,10,15 and 19 features.
 
+
+
 |# of features | p-score | recall-score | f1 - score |
 |--------------|---------|--------------|------------|
-|5||||
-|10||||
-|15||||
-|18|||||
+|5|  0.2142857|0.599999999|0.315789|
+|10|0.25|0.59999999|0.352941|
+|15|0.33333333|0.5999999|0.4285714|
+|18|0.428571|0.599999|0.5|
+*These scores are calculated on training set not test set*
 
 ***New feature Creation*** - For the requirement of the project I created a
 feature to quantify the communication of a person with persons of interest. It is
@@ -98,17 +101,19 @@ of various algorithms tested.
 
 |Algorithm | Validation f1 Score | Test f1 Score |
 |--------------------------------------------------|
-|RandomForest | 0.35  | 0.46 |
-|Logistic Regression |0.35|0.46|
-|Support Vector Machines| 0.35 | 0.46 |
+|RandomForest | 0.333333 | 0.1761 |
+|Logistic Regression |0.5|0.4262|
+|Support Vector Machines|N/A| N/A|
+
+*N/A means the algorithm was unable to train on the given features*
 
 The optimum params for the Logistic Regression algorithm are :
 
 |Parameter name |  Values |
 |-------------|-----------|
-|C | 10^20 |
-|Tolerance | 10 ^-10 |
-|Loss |'l1' |
+|C | 1000 |
+|Tolerance | 1e-10 |
+|Penalty |'l1' |
 
 
 
