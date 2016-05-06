@@ -27,7 +27,7 @@ below
 ***Outliers*** - I found two outliers in the financial data with the names
 appearing as **TOTAL** and **TRAVEL AGENCY IN THE PARK**. They were removed from the
 dataset before running the algorithms. *Total* was the sum total of all the
-finances and [*TRAVEL AGENCY IN THE PARK[1]*](#References) was an organization of the sister of
+finances and [*TRAVEL AGENCY IN THE PARK[3]*](#References) was an organization of the sister of
 Ken Lay hence it was removed.
 
 Also in the dataset there were many missing values reported as **NaN**. These
@@ -192,13 +192,18 @@ High precision relates to a low false positive rate, and high recall relates to
 a low false negative rate. In layman's terms we are identifying correct persons
 as POI and rejecting who are not.
 
-The target of the model was to acheive 0.3 accuracy on the both precision
-and recall. The current model acheives 0.52 in precision and 0.37 in recall
+The target of the model was to acheive **0.37** value on precision
+and **0.50** on recall. The current model acheives 0.52 in precision and 0.37 in recall
 scores.
 This means that for every correct positive prediction we also did an incorrect
-positive prediction. And we missed 63% of the POI and classified them as non-POI.
+negative prediction. And we missed 63% of the cases we missed POI and classified
+ them as non-POI.
 
 
 #### References
 
-[Travel Agency in the Park](http://content.time.com/time/magazine/article/0,9171,198885,00.html)
+1. [Enron on Wikipedia](https://en.wikipedia.org/wiki/Enron)
+2. [Enron : The Smartest guys in the Room](https://freedocumentaries.org/documentary/enron-the-smartest-guys-in-the-room)
+3. [Travel Agency in the Park - News Report](http://content.time.com/time/magazine/article/0,9171,198885,00.html)
+4. [sklearn documentation](http://scikit-learn.org/stable/)
+5. [Enron Email dataset](https://www.cs.cmu.edu/~./enron/)
