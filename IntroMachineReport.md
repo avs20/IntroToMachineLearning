@@ -1,9 +1,40 @@
 
-1. Summarize for us the goal of this project and how machine learning is useful
+**1. Summarize for us the goal of this project and how machine learning is useful
 in trying to accomplish it. As part of your answer, give some background on the
 dataset and how it can be used to answer the project question. Were there any
  outliers in the data when you got it, and how did you handle those?  [relevant
- rubric items: “data exploration”, “outlier investigation”]
+ rubric items: “data exploration”, “outlier investigation”]**
+
+Enron was the most valuable company in USA during the 2000. But due to creatively
+planned accounting numbers it's financial condition was not as stable as projected.
+Enron filed for bankruptcy  in 2001. So in just 2 years it went from the most
+valuable company to non-existent. During the investigation the financials and
+email corpus of the Enron employees was released to the public and it is one
+of the largest corpus of the real emails present.
+
+The goal of this project is to use machine learning to know if we can predict
+with reasonable accuracy the persons of interest in the Enron Scandal from their
+email data and the financial data available. Some statistics of the databse are
+below
+
+|statistics | Info |
+|-----------|------|
+|Number of people | 146 |
+|Number of features for each person| 21 |
+|Number of persons of intrest present | 18 |
+|Total Persons of interest | 35 |
+
+***Outliers*** - I found two outliers in the financial data with the names
+appearing as **TOTAL** and **TRAVEL AGENCY IN THE PARK**. They were removed from the
+dataset before running the algorithms. *Total* was the sum total of all the
+finances and [*TRAVEL AGENCY IN THE PARK[1]*](#References) was an organization of the sister of
+Ken Lay hence it was removed.
+
+Also in the dataset there were many missing values reported as **NaN**. These
+were automatically handled by the python processing and converted to 0.
+
+
+
 
 **2. What features did you end up using in your POI identifier, and what
 selection process did you use to pick them? Did you have to do any scaling?
@@ -161,3 +192,8 @@ and recall. The current model acheives 0.52 in precision and 0.37 in recall
 scores.
 This means that for every correct positive prediction we also did an incorrect
 positive prediction. And we missed 63% of the POI and classified them as non-POI.
+
+
+#### References
+
+[Travel Agency in the Park](http://content.time.com/time/magazine/article/0,9171,198885,00.html)
