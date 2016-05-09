@@ -12,6 +12,7 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
+from sklearn.pipeline import Pipeline
 from sklearn.metrics import f1_score,recall_score,precision_score
 
 
@@ -200,8 +201,9 @@ best = [i[0] for i in sorted(enumerate(f1_scores),key=lambda x : x[0])]
 # the winning algo will be last in the list
 winner_idx = best[-1]
 
+clf = best_clf[winner_idx]
 #get the winning algo
-clf= best_clf[winner_idx]
+clf= Pipeline( steps = [('scaler',scaler),("classifer", clf)]);
 
 #print clf
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
