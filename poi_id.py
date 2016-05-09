@@ -15,6 +15,8 @@ from sklearn import svm
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import f1_score,recall_score,precision_score
 
+import pandas as pd
+import numpy as np
 
 
 def genrateClassifiers():
@@ -93,7 +95,11 @@ features_list = ['poi','salary', 'deferral_payments', 'loan_advances', \
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
-#print data_dict.head()
+
+#replace missing values with median for the purposes of this presentation
+
+
+
 ### Task 2: Remove outliers
 outliers = ['TOTAL', 'THE TRAVEL AGENCY IN THE PARK']
 
@@ -119,6 +125,20 @@ for name_key in data_dict:
 
 features_list = features_list + ['poi_ratio']
 
+#now clean the features from NaN values. 2 strategies are used
+# 1. Remove the columns which have greater that 50% NaN values
+# 2. Impute the remaining NaN values to median
+
+#pre processing the data for the NaN values
+dataframe = pd.DataFrame.from_records(list(data_dict.values()))
+persons = pd.Series(list(data_dict.keys()))
+
+dataframe.replace(to_replace='NaN', value=np.nan, inplace=True)
+#get the number of NaN values in the column.
+print dataframe.isnull().sum()
+
+# print features.isnull().sum()
+
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
@@ -132,7 +152,6 @@ labels, features = targetFeatureSplit(data)
 from sklearn import preprocessing
 scaler = preprocessing.MinMaxScaler()
 features = scaler.fit_transform(features)
-print features.shape
 
 ### Task 4: Try a varity of classifiers
 ### Please name your classifier clf for easy export below.
@@ -185,14 +204,14 @@ for train_index, test_index in shuffle:
         labels_test.append(labels[jj])
 
 
-print labels_test,'\n', labels_train
+
 
 #generate all the classfiers to work upon the data
 clf_list = genrateClassifiers()
 
 # get the rpf scores and the optimized classifiers from all the params
 rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_train)
-
+print rpf_score
 # sort the scores to get the winning algo
 f1_scores = [i[2] for i in rpf_score]
 
@@ -203,6 +222,7 @@ winner_idx = best[-1]
 
 clf = best_clf[winner_idx]
 #get the winning algo
+#Scaling is added into the pipeline because the classifier exported will not scale the features.
 clf= Pipeline( steps = [('scaler',scaler),("classifer", clf)]);
 
 #print clf

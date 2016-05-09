@@ -14,14 +14,14 @@ of the largest corpus of the real emails present.
 
 The goal of this project is to use machine learning to know if we can predict
 with reasonable accuracy the persons of interest in the Enron Scandal from their
-email data and the financial data available. Some statistics of the databse are
+email data and the financial data available. Some statistics of the database are
 below
 
 |statistics | Info |
 |-----------|------|
 |Number of people | 146 |
 |Number of features for each person| 21 |
-|Number of persons of intrest present | 18 |
+|Number of persons of interest present | 18 |
 |Total Persons of interest | 35 |
 
 ***Outliers*** - I found two outliers in the financial data with the names
@@ -30,9 +30,35 @@ dataset before running the algorithms. *Total* was the sum total of all the
 finances and *TRAVEL AGENCY IN THE PARK[3]* was an organization of the sister of
 Ken Lay hence it was removed.
 
-Also in the dataset there were many missing values reported as **NaN**. These
-were automatically handled by the python processing and converted to 0.
+Also in the dataset there were many missing values reported as **NaN**. A simple
+info is
 
+|Column Name| Number of NaN values |
+|------------|---------------------|
+|bonus                       |  63 |
+|deferral_payments            |106|
+|director_fees               | 128|
+|deferred_income             |  96|
+|exercised_stock_options     |  43|
+|email_address               |  33|
+|expenses                   |   50|
+|from_messages               |  58|
+|from_poi_to_this_person     |  58|
+|from_this_person_to_poi     |  58|
+|loan_advances               | 141|
+|long_term_incentive         |  79|
+|other                        | 53|
+|poi                          |  0|
+|poi_ratio                    | 58|
+|restricted_stock            |  35|
+|restricted_stock_deferred   | 127|
+|salary                      |  50|
+|shared_receipt_with_poi      | 58|
+|to_messages                 |  58|
+|total_payments              |  21|
+|total_stock_value           |  19|
+
+All the NaN Values are reset to 0 in the function ***featureFormat***.
 
 
 
@@ -101,19 +127,19 @@ of various algorithms tested.
 
 |Algorithm | Validation f1 Score | Test f1 Score |
 |----------|---------------------|------------------|
-|RandomForest | 0.333333 | 0.1761 |
-|Logistic Regression |0.5|0.43190|
+|Random Forrest | 1 | 0.37435 |
+|Logistic Regression |0.72|0.4288|
 |Support Vector Machines|N/A| N/A|
 
 *N/A means the algorithm was unable to train on the given features*
 
-The optimum parameters for the Logistic Regression algorithm are :
+The optimum parameters for the Random Forrest algorithm are :
 
 |Parameter name |  Values |
 |-------------|-----------|
-|C | 1000 |
-|Tolerance | 1e-10 |
-|Penalty |'l1' |
+|max_features | 5 |
+|n_estimators | 10 |
+
 
 
 
@@ -132,13 +158,14 @@ calculate from the available list of choices. Not choosing the correct parameter
  may lead us to not the optimum results. Also the parameters change for
 different datasets, so we also tune the parameters according to the dataset.
 
-The algorithm I chose finally is Logistic Regression and it has a list of parameters
-to tune from penalty type, C and tolerance. *Penalty* tries the different types
-of norm. *C* is used for the trade-off between smooth boundary or correct
-classification. *Tolerance* is the stopping criteria for the algorithm.
+The algorithm finally chosen is **Random Forrest**  and it has a list of parameters
+to tune from *n_estiamtors*, *max_features*. *n_estiamtors* is the number of
+decision trees in the forest. *max_features* is the number of features to
+ consider when looking for the best split.
 
-While searching for different algorithms I tested RandomForest and SVM. They have
-some different params like number of estimators and features to use, gamma,
+
+While searching for different algorithms I tested Logistic Regression and SVM.
+They havesome different params like number of C, penalty and features to use, gamma,
 kernel type ,etc..
 
 
@@ -192,12 +219,13 @@ High precision relates to a low false positive rate, and high recall relates to
 a low false negative rate. In layman's terms we are identifying correct persons
 as POI and rejecting who are not.
 
-The target of the model was to acheive **0.37** value on precision
-and **0.50** on recall. The current model acheives 0.52 in precision and 0.37 in recall
+The target of the model was to acheive **0.3** value on precision
+and **0.3** on recall. The current model acheives ***0.37435*** in precision and
+ ***0.50200*** in recall
 scores.
 This means that for every correct positive prediction we also did an incorrect
 negative prediction. And we missed 63% of the cases we missed POI and classified
- them as non-POI.
+them as non-POI.
 
 
 #### Reflection
