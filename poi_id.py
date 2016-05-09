@@ -45,7 +45,7 @@ def genrateClassifiers():
         'gamma' : [1,10,1e3]
     }
 
-    classifiers.append((clf3,param3))
+    # classifiers.append((clf3,param3))
     return classifiers
 
 
@@ -99,8 +99,6 @@ outliers = ['TOTAL', 'THE TRAVEL AGENCY IN THE PARK']
 for outlier in outliers:
     data_dict.pop(outlier,0)
 
-#print data_dict
-
 
 ### Task 3: Create new feature(s)
 """
@@ -119,7 +117,7 @@ for name_key in data_dict:
 
 
 features_list = features_list + ['poi_ratio']
-# print len(features_list)
+
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
@@ -166,25 +164,49 @@ features = SelectKBest(f_classif,k = 18).fit_transform(features,labels)
 ### stratified shuffle split cross validation. For more info: 
 ### http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedShuffleSplit.html
 
-# Example starting point. Try investigating other evaluation techniques!
-from sklearn.cross_validation import train_test_split
-features_train, features_test, labels_train, labels_test = \
-    train_test_split(features, labels, test_size=0.3, random_state=42)
 
+
+### Generating the testing and training set. Stratified shuffle split is used because the data is less.
+from sklearn.cross_validation import  StratifiedShuffleSplit
+shuffle = StratifiedShuffleSplit(labels,10, test_size=0.3,random_state=42)
+
+features_train = []
+features_test = []
+labels_train = []
+labels_test = []
+for train_index, test_index in shuffle:
+
+    for ii in train_index:
+        features_train.append(features[ii])
+        labels_train.append(labels[ii])
+    for jj in test_index:
+        features_test.append(features[jj])
+        labels_test.append(labels[jj])
+
+
+print labels_test,'\n', labels_train
+
+#generate all the classfiers to work upon the data
 clf_list = genrateClassifiers()
 
-# rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_train)
+# get the rpf scores and the optimized classifiers from all the params
+rpf_score, best_clf = optimize_all_classifier(clf_list,features_train,labels_train)
 
-# print rpf_score
+# sort the scores to get the winning algo
+f1_scores = [i[2] for i in rpf_score]
 
+best = [i[0] for i in sorted(enumerate(f1_scores),key=lambda x : x[0])]
 
+# the winning algo will be last in the list
+winner_idx = best[-1]
+
+#get the winning algo
+clf= best_clf[winner_idx]
+
+#print clf
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
 ### that the version of poi_id.py that you submit can be run on its own and
 ### generates the necessary .pkl files for validating your results.
-
-# Now use the best classifier to dump the files
-clf = LogisticRegression(C = 1000,class_weight="auto", penalty="l1", random_state= 24, tol= 0.001)
-
 
 dump_classifier_and_data(clf, my_dataset, features_list)
