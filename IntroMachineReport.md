@@ -115,8 +115,8 @@ different for different features like salary was in dollars but to_messages were
 
 I did the training on the following algorithms
 
-1. RandomForest
-2. ***Logistic Regression ( WINNER )***
+1. ***Random Forrest( WINNER )***
+2. Logistic Regression
 3. Support Vector Machine
 
 I ended up using the Logistic Regression algorithm because of its superior
